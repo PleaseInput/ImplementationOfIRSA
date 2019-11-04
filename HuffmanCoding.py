@@ -1,9 +1,11 @@
 """
+Input: a string. e.g. 'app'.
+Output: a header(reverseCode) and a binary string. e.g. a0p1, 011.
 -1. get frequence table
 -2. get heap nodes
 -3. merge the heap to a tree
 -4. get code and reverseCode
-5. encode
+-5. encode
 """
 import heapq
 
@@ -69,7 +71,7 @@ class HuffmanCoding:
         self.code[root.chr] = currentCode
         self.reverseCode[currentCode] = root.chr
 
-    # encoded text: e.g. a->010
+    # encoded text: e.g. app->011
     def getEncodedText(self):
         for chr in self.HCInputText:
             self.HCOutputText += self.code[chr]
