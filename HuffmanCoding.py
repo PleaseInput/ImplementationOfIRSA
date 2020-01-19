@@ -115,11 +115,10 @@ class HuffmanCoding:
         
         return textBeforeHC
 
-def main():
+if __name__ == "__main__":
     testText = "apple"
     hc = HuffmanCoding(testText)
     reversedCode, textAfterHC = hc.compressText()
     textBeforeHC = hc.decompressText(reversedCode, textAfterHC)
 
     print(testText == textBeforeHC)
-main()
