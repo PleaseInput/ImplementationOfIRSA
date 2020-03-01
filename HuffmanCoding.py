@@ -9,6 +9,7 @@ Output: a header(reversedCode) and a binary string. e.g. a0p1, 011.
 """
 import heapq
 
+
 class HeapNode:
     def __init__(self, chr, freq):
         self.chr = chr
@@ -18,21 +19,25 @@ class HeapNode:
 
     # __cmp__ has gone since python 3
     def __lt__(self, other):
-        if other == None:
+        if other is None:
             return -1
         if not isinstance(other, HeapNode):
             return -1
         return self.freq < other.freq
-        
+
+
 class HuffmanCoding:
 
     def __init__(self, textBeforeHC):
         if textBeforeHC is None:
-            print('Input is None'); return
+            print('Input is None')
+            return
         if not isinstance(textBeforeHC, str):
-            print('Input is not str'); return
+            print('Input is not str')
+            return
         if textBeforeHC == '':
-            print('Input is empty'); return
+            print('Input is empty')
+            return
 
         self.textBeforeHC = textBeforeHC
 
@@ -65,7 +70,8 @@ class HuffmanCoding:
 
     def getCode(self, root):
         if root == None:
-            assert False; return
+            assert False
+            return
 
         currentCode = ""
         code = {}
@@ -100,7 +106,7 @@ class HuffmanCoding:
         root = self.mergeHeapNodes(heapNodes)
         code, reversedCode = self.getCode(root)
         textAfterHC = self.getEncodedText(code)
-        
+
         return reversedCode, textAfterHC
 
     # decompress text
@@ -112,8 +118,9 @@ class HuffmanCoding:
             if currentCode in reversedCode:
                 textBeforeHC += reversedCode[currentCode]
                 currentCode = ''
-        
+
         return textBeforeHC
+
 
 if __name__ == "__main__":
     testText = "apple"
