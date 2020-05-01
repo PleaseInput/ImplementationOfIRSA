@@ -1,0 +1,2 @@
+2020/05/01:
+    From the last commit to this time, read Learning Python, 3rd Edition, from the chapter 1 to chapter 14.
