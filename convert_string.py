@@ -1,4 +1,4 @@
-Base64Table = [
+BASE64_TABLE = [
     'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
     'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f',
     'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
@@ -6,7 +6,7 @@ Base64Table = [
 ]
 
 
-def getBase64StringFrom(binString):
+def get_base64_string_from(binString):
     if isinstance(binString, str) and set(binString).issubset({'0', '1'}):
         numberOfPaddedZero = len(binString) % 6
         binString = '{0:06b}'.format(numberOfPaddedZero) + binString + (numberOfPaddedZero * '0')
@@ -14,15 +14,15 @@ def getBase64StringFrom(binString):
         base64String = ''
         for i in range(0, len(binString), 6):
             index = int(binString[i:i+6], 2)
-            base64String += Base64Table[index]
+            base64String += BASE64_TABLE[index]
 
         return base64String
 
 def getBinStringFrom(base64String):
-    if isinstance(base64String, str) and set(base64String).issubset(set(Base64Table)):
+    if isinstance(base64String, str) and set(base64String).issubset(set(BASE64_TABLE)):
         binString = ''
         for char in base64String:
-            index = Base64Table.index(char)
+            index = BASE64_TABLE.index(char)
             binString += '{0:06b}'.format(index)
 
         numberOfPaddedZero = int(binString[0:6], 2)
@@ -32,7 +32,7 @@ def getBinStringFrom(base64String):
 
 if __name__ == "__main__":
     testString = '000001'
-    afStr = getBase64StringFrom(testString)
+    afStr = get_base64_string_from(testString)
     print(afStr)
     bfStr = getBinStringFrom(afStr)
     print(bfStr)
