@@ -41,7 +41,7 @@ class HuffmanCoding:
 
         self.textBeforeHC = textBeforeHC
 
-    def getFrequence(self):
+    def _get_frequence(self):
         frequence = {}
         for chr in self.textBeforeHC:
             if not chr in frequence:
@@ -49,7 +49,7 @@ class HuffmanCoding:
 
         return frequence
 
-    def getHeapNodes(self, frequence):
+    def _get_heap_nodes(self, frequence):
         heapNodes = []
         for chr in frequence:
             heapNode = HeapNode(chr, frequence[chr])
@@ -57,7 +57,7 @@ class HuffmanCoding:
 
         return heapNodes
 
-    def mergeHeapNodes(self, heapNodes):
+    def _merge_heap_nodes(self, heapNodes):
         while len(heapNodes) > 1:
             tmpNode0 = heapq.heappop(heapNodes)
             tmpNode1 = heapq.heappop(heapNodes)
@@ -68,7 +68,7 @@ class HuffmanCoding:
 
         return heapq.heappop(heapNodes)
 
-    def getCode(self, root):
+    def _get_code(self, root):
         if root == None:
             assert False
             return
@@ -76,15 +76,15 @@ class HuffmanCoding:
         currentCode = ""
         code = {}
         reversedCode = {}
-        self.getCodeRecursively(root, currentCode, code, reversedCode)
+        self._get_code_recursively(root, currentCode, code, reversedCode)
 
         return code, reversedCode
 
-    def getCodeRecursively(self, root, currentCode, code, reversedCode):
+    def _get_code_recursively(self, root, currentCode, code, reversedCode):
         # not leaf
         if root.chr == None:
-            self.getCodeRecursively(root.leftChild, currentCode + "0", code, reversedCode)
-            self.getCodeRecursively(root.rightChild, currentCode + "1", code, reversedCode)
+            self._get_code_recursively(root.leftChild, currentCode + "0", code, reversedCode)
+            self._get_code_recursively(root.rightChild, currentCode + "1", code, reversedCode)
             return
 
         # leaf
@@ -92,7 +92,7 @@ class HuffmanCoding:
         reversedCode[currentCode] = root.chr
 
     # encoded text: e.g. app->011
-    def getEncodedText(self, code):
+    def _get_encoded_text(self, code):
         textAfterHC = ''
         for chr in self.textBeforeHC:
             textAfterHC += code[chr]
@@ -100,17 +100,17 @@ class HuffmanCoding:
         return textAfterHC
 
     # compress text: e.g. apple->cm
-    def compressText(self):
-        frequence = self.getFrequence()
-        heapNodes = self.getHeapNodes(frequence)
-        root = self.mergeHeapNodes(heapNodes)
-        code, reversedCode = self.getCode(root)
-        textAfterHC = self.getEncodedText(code)
+    def compress_text(self):
+        frequence = self._get_frequence()
+        heapNodes = self._get_heap_nodes(frequence)
+        root = self._merge_heap_nodes(heapNodes)
+        code, reversedCode = self._get_code(root)
+        textAfterHC = self._get_encoded_text(code)
 
         return reversedCode, textAfterHC
 
     # decompress text
-    def decompressText(self, reversedCode, textAfterHC):
+    def decompress_text(self, reversedCode, textAfterHC):
         currentCode = ''
         textBeforeHC = ''
         for chr in textAfterHC:
@@ -121,11 +121,14 @@ class HuffmanCoding:
 
         return textBeforeHC
 
-
-if __name__ == "__main__":
+def main():
     testText = "apple"
     hc = HuffmanCoding(testText)
-    reversedCode, textAfterHC = hc.compressText()
-    textBeforeHC = hc.decompressText(reversedCode, textAfterHC)
+    reversedCode, textAfterHC = hc.compress_text()
+    textBeforeHC = hc.decompress_text(reversedCode, textAfterHC)
 
     print(testText == textBeforeHC)
+
+if __name__ == "__main__":
+    main()
+    
