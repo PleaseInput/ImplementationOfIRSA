@@ -64,7 +64,7 @@ class AESCrypto:
             print('remove padding fail')
 
 def main():
-    test = AES_crypto(key = 'keys' * 4, iv = 'keys' * 4)
+    test = AESCrypto(key = 'keys' * 4, iv = 'keys' * 4)
     t0 = test.encrypt('hello' * 4)
     print(t0)
     t1 = test.decrypt(t0)
