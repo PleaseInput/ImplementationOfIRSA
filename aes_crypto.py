@@ -1,7 +1,7 @@
 from Crypto.Cipher import AES
 from Crypto.Random import get_random_bytes
 
-class AES_crypto:
+class AESCrypto:
     """
     AES mode is always .CBC currently.
     """
@@ -63,8 +63,12 @@ class AES_crypto:
         except:
             print('remove padding fail')
 
-test = AES_crypto(key = 'keys' * 4, iv = 'keys' * 4)
-t0 = test.encrypt('hello' * 4)
-print(t0)
-t1 = test.decrypt(t0)
-print(t1)
+def main():
+    test = AES_crypto(key = 'keys' * 4, iv = 'keys' * 4)
+    t0 = test.encrypt('hello' * 4)
+    print(t0)
+    t1 = test.decrypt(t0)
+    print(t1)
+
+if __name__ == '__main__':
+    main()
