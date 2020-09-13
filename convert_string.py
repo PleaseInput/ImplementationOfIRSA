@@ -18,7 +18,7 @@ def get_base64_string_from(binString):
 
         return base64String
 
-def getBinStringFrom(base64String):
+def get_bin_string_from(base64String):
     if isinstance(base64String, str) and set(base64String).issubset(set(BASE64_TABLE)):
         binString = ''
         for char in base64String:
@@ -30,9 +30,13 @@ def getBinStringFrom(base64String):
 
         return binString
 
-if __name__ == "__main__":
+def main():
     testString = '000001'
     afStr = get_base64_string_from(testString)
     print(afStr)
-    bfStr = getBinStringFrom(afStr)
+    bfStr = get_bin_string_from(afStr)
     print(bfStr)
+
+if __name__ == "__main__":
+    main()
+    
