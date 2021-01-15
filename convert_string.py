@@ -6,37 +6,39 @@ BASE64_TABLE = [
 ]
 
 
-def get_base64_string_from(binString):
-    if isinstance(binString, str) and set(binString).issubset({'0', '1'}):
-        numberOfPaddedZero = len(binString) % 6
-        binString = '{0:06b}'.format(numberOfPaddedZero) + binString + (numberOfPaddedZero * '0')
+def get_base64_string_from(binary_string):
+    if isinstance(binary_string, str) and set(binary_string).issubset({'0', '1'}):
+        num_of_padded_zero = len(binary_string) % 6
+        binary_string = '{0:06b}'.format(num_of_padded_zero) + binary_string + (num_of_padded_zero * '0')
 
-        base64String = ''
-        for i in range(0, len(binString), 6):
-            index = int(binString[i:i+6], 2)
-            base64String += BASE64_TABLE[index]
+        base64_string = ''
+        for i in range(0, len(binary_string), 6):
+            index = int(binary_string[i:i + 6], 2)
+            base64_string += BASE64_TABLE[index]
 
-        return base64String
+        return base64_string
 
-def get_bin_string_from(base64String):
-    if isinstance(base64String, str) and set(base64String).issubset(set(BASE64_TABLE)):
-        binString = ''
-        for char in base64String:
+
+def get_bin_string_from(base64_string):
+    if isinstance(base64_string, str) and set(base64_string).issubset(set(BASE64_TABLE)):
+        bin_string = ''
+        for char in base64_string:
             index = BASE64_TABLE.index(char)
-            binString += '{0:06b}'.format(index)
+            bin_string += '{0:06b}'.format(index)
 
-        numberOfPaddedZero = int(binString[0:6], 2)
-        binString = binString[6:] if numberOfPaddedZero==0 else binString[6:(-1)*numberOfPaddedZero]
+        num_of_padded_zero = int(bin_string[0:6], 2)
+        bin_string = bin_string[6:] if num_of_padded_zero == 0 else bin_string[6:(-1)*num_of_padded_zero]
 
-        return binString
+        return bin_string
+
 
 def main():
-    testString = '000001'
-    afStr = get_base64_string_from(testString)
-    print(afStr)
-    bfStr = get_bin_string_from(afStr)
-    print(bfStr)
+    test_string = '000001'
+    base64_string = get_base64_string_from(test_string)
+    print(base64_string)
+    binary_string = get_bin_string_from(base64_string)
+    print(binary_string)
+
 
 if __name__ == "__main__":
     main()
-    
